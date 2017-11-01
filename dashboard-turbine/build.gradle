@@ -1,0 +1,15 @@
+apply plugin: 'java'
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
+    compile('org.springframework.cloud:spring-cloud-starter-turbine'){
+        //turbine默认使用eureka注册中心，替换为consul
+        exclude group: 'org.springframework.cloud', module: 'spring-cloud-starter-eureka'
+    }
+    compile('org.springframework.cloud:spring-cloud-starter-consul-discovery')
+}
+
+bootRepackage {
+    mainClass = 'com.zrs.turbine.TurbineApplication'
+}

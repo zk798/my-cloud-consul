@@ -1,0 +1,22 @@
+server:
+  port: 8008
+spring:
+  application.name: api-a
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+#        healthCheckPath: ${management.contextPath}/health
+        healthCheckInterval: 15s
+        instance-id: api-a
+        prefer-ip-address: true
+
+
+endpoints:
+  shutdown:
+    #启用shutdown
+    enabled: true
+    #禁用密码验证
+    sensitive: false

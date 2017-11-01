@@ -1,0 +1,6 @@
+rootProject.name = 'my-cloud-consul'
+include 'server-a'
+include 'client-feign'
+include 'dashboard-hystrix'
+include 'dashboard-turbine'
+

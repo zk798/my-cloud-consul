@@ -1,0 +1,22 @@
+server:
+  port: 8766
+spring:
+  application:
+    name: dashboard-hystrix
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+#        healthCheckPath: ${management.contextPath}/health
+        healthCheckInterval: 15s
+        instance-id: dashboard-hystrix
+        prefer-ip-address: true
+
+endpoints:
+  shutdown:
+    #启用shutdown
+    enabled: true
+    #禁用密码验证
+    sensitive: false

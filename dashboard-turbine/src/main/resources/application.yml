@@ -1,0 +1,27 @@
+server:
+  port: 8765
+spring:
+  application:
+    name: dashboard-turbine
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+#        healthCheckPath: ${management.contextPath}/health
+        healthCheckInterval: 15s
+        instance-id: dashboard-turbine
+        prefer-ip-address: true
+
+turbine:
+  aggregator:
+    clusterConfig: default   # 指定聚合哪些集群，多个使用","分割，默认为default。可使用http://.../turbine.stream?cluster={clusterConfig之一}访问
+  appConfig: feign  # 配置Eureka中的serviceId列表，表明监控哪些服务
+  clusterNameExpression: new String("default")
+
+endpoints:
+  shutdown:
+    #启用shutdown
+    enabled: true
+    #禁用密码验证
+    sensitive: false

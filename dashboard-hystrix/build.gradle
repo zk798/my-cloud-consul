@@ -1,0 +1,13 @@
+
+apply plugin: 'java'
+
+dependencies {
+    compile('org.springframework.cloud:spring-cloud-starter-consul-discovery')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix')
+    compile('org.springframework.cloud:spring-cloud-starter-hystrix-dashboard')
+}
+
+bootRepackage {
+    mainClass = 'com.zrs.hystrixdashboard.HystrixDashboardApplication'
+}

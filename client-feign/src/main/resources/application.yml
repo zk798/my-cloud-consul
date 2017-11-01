@@ -1,0 +1,33 @@
+server:
+  port: 8088
+spring:
+  application.name: feign
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+#        healthCheckPath: ${management.contextPath}/health
+        healthCheckInterval: 15s
+#        instance-id: consul-miya
+
+feign:
+  #Feign自带断路器,需要配置开启
+  hystrix.enabled: true
+  #启动httpclient，主要使用线程池
+  httpclient.enabled: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+
+endpoints:
+  shutdown:
+    #启用shutdown
+    enabled: true
+    #禁用密码验证
+    sensitive: false
