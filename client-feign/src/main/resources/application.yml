@@ -1,5 +1,7 @@
 server:
   port: 8088
+management:
+  context-path: /admin
 spring:
   application.name: feign
 
@@ -8,9 +10,10 @@ spring:
       host: localhost
       port: 8500
       discovery:
-#        healthCheckPath: ${management.contextPath}/health
+        healthCheckPath: "${management.context-path}/health"
         healthCheckInterval: 15s
-#        instance-id: consul-miya
+        instance-id: ${spring.application.name}:${server.port}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+        prefer-ip-address: true
 
 feign:
   #Feign自带断路器,需要配置开启

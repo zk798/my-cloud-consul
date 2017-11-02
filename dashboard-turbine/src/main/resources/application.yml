@@ -1,5 +1,7 @@
 server:
   port: 8765
+management:
+  context-path: /admin
 spring:
   application:
     name: dashboard-turbine
@@ -8,9 +10,9 @@ spring:
       host: localhost
       port: 8500
       discovery:
-#        healthCheckPath: ${management.contextPath}/health
+        healthCheckPath: "${management.context-path}/health"
         healthCheckInterval: 15s
-        instance-id: dashboard-turbine
+        instance-id: ${spring.application.name}:${server.port}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
         prefer-ip-address: true
 
 turbine:

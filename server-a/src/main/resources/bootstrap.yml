@@ -1,22 +1,26 @@
 server:
   port: 8008
+management:
+  context-path: /admin
 spring:
-  application.name: api-a
-
+  application:
+    name: api-a
   cloud:
     consul:
       host: localhost
       port: 8500
       discovery:
-#        healthCheckPath: ${management.contextPath}/health
+        healthCheckPath: "${management.context-path}/health"
         healthCheckInterval: 15s
-        instance-id: api-a
+        instance-id: ${spring.application.name}:${server.port}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
         prefer-ip-address: true
-
 
 endpoints:
   shutdown:
     #启用shutdown
     enabled: true
     #禁用密码验证
+    sensitive: false
+  restart:
+    enabled: true
     sensitive: false
